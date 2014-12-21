@@ -55,6 +55,21 @@ if (!isset($_POST['button'])) {
 </form>
 <br>
 
+<a href="index.php?hint=true">Hint</a>
+
+<?php 
+if(isset($_GET['hint'])) {
+?>
+<div class="hint">
+Since the user input is not stripped or validated, any HTML you type into the text field will be rendered on the page as if it was part of the source. Try adding some text inside header tags, such as
+<?php echo htmlspecialchars('<h1>Hello World!</h1>'); ?> to show how you can manipulate the text. While this isn't particularily malicious, there are plenty of worse things that can be done.
+You could try to insert an HTML or Javascript redirect, which would send users to a different page without them even noticing. Even worse, you could use Javascript to steal cookie values
+and send them to a different website for harvesting. A <a href="cookiecollector.php">Cookie Collector</a> page has been provided for testing this.
+</div>
+<?php
+}
+?>
+
 <p style="font-size:10px"><a href="https://www.keaneokelley.com">Keane was here.</a></p>
 
 
