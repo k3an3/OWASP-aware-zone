@@ -1,5 +1,5 @@
 <?php
-setcookie("Secret", "Your super secret session ID=5d440ff3c129c01993dc2b", time() + 3600);
+setcookie("SuperSecretCookie", $_SERVER['REMOTE_ADDR'], time() + 3600);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -19,7 +19,7 @@ Leave me a comment: <input type="text" name="cool">
 <br>
 <?php
 if (isset($_POST['cool']) && !isset($_POST['button'])) {
-	echo "<h1>Thanks for the compliment!</h1><br/>";
+	echo "<h1>Thanks for posting!</h1><br/>";
 	echo "You said: "; 
 	echo $_POST["cool"]; 
 	file_put_contents("list.txt", trim($_POST["cool"]).PHP_EOL, FILE_APPEND);
