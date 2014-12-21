@@ -4,6 +4,7 @@ setcookie("SuperSecretCookie", $_SERVER['REMOTE_ADDR'], time() + 3600);
 <!DOCTYPE HTML>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
 <link rel="shortcut icon" href="mat.ico">
 <title>XSS Demo</title>
 </head>
