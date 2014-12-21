@@ -7,8 +7,8 @@
 
 <body>
 <h1>Very Flashy and Complicated Website</h1>
-<p>Welcome to my site. I'm awesome d3veloper. My sites super securez.</p>
-<p>How awesome I am??</p>
+<p>Welcome to my site. This site has extreme security. My site can't be hacked.</p>
+<p>How awesome am I??</p>
 
 <script type="text/javascript">
 function validate()
@@ -28,7 +28,7 @@ function validate()
 
 </script>
 
-<form action="test.php" id="coolForm" onsubmit="return (validate());" method="post">
+<form action="index.php" id="coolForm" onsubmit="return (validate());" method="post">
 Tell me that I'm awesome: <input type="text" name="cool">
 <input type="submit" value="submit">
 </form>
@@ -37,10 +37,14 @@ Tell me that I'm awesome: <input type="text" name="cool">
 <input type="hidden" value="submit">
 </form>
 <br>
-<img src="http://kbondale.files.wordpress.com/2014/06/matrix.gif" height=500 width=500/>
-<form method="post">
-    <p>
-        <button name="button">Reset</button>
+<?php 
+if (isset($_POST['cool']) && !isset($_POST['button'])) {
+	echo "<h1>Thanks for the compliment!</h1><br/>";
+	echo "You said: "; 
+	echo htmlspecialchars($_POST["cool"]); 
+	file_put_contents("list.txt", trim($_POST["cool"]).PHP_EOL, FILE_APPEND);
+} 
+?>
 <?php
     if (isset($_POST['button']))
     {
@@ -48,8 +52,30 @@ Tell me that I'm awesome: <input type="text" name="cool">
 		 echo "Reset Complete!";
     }
 ?>
-</p></form>
-<p style="font-size:10px">Keane was here.</p>
+<br><br>
+
+</body>
+
+<?php 
+if (!isset($_POST['button'])) {
+	echo "<b>List of Awesome things people have said about me:</b><br/>\n";
+	$lines = file("list.txt");
+	foreach ($lines as $line_num => $line) {
+	  echo "#<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
+	}
+	
+	echo "<br/>";
+}
+?>
+
+<form method="post">
+    <p>
+        <button name="button">Reset</button>
+    </p>
+</form>
+<br>
+
+<p style="font-size:10px"><a href="https://www.keaneokelley.com">Keane was here.</a></p>
 
 
 </html>
