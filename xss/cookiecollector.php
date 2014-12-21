@@ -10,12 +10,8 @@
 <br/>See if you can send a user's cookie using a GET request to this page using the GET field called 'cookie'.</p>
 <?php
 if (isset($_GET['cookie']) && !isset($_POST['button'])) {
-	file_put_contents("cookies.txt", trim($_GET["cookie"]), FILE_APPEND);
+	file_put_contents("cookies.txt", trim($_GET["cookie"]).PHP_EOL, FILE_APPEND);
 } 
-if (isset($_POST['button'])) {
-      exec('cat /dev/null > cookies.txt');
-      echo "Reset Complete!";
-}
 ?>
 <br>
 
@@ -30,15 +26,30 @@ if (!isset($_POST['button'])) {
 	}
 	echo "<br/>";
 }
+if (isset($_POST['button'])) {
+      exec('cat /dev/null > cookies.txt');
+      echo "Reset Complete!";
+}
+if (isset($_POST['button2'])) {
+      exec('cat /dev/null > list.txt');
+      echo "Reset Complete!";
+}
 ?>
 
 <form method="post">
     <p>
-        <button name="button">Reset</button>
+        <button name="button">Reset this page</button>
+    </p>
+</form>
+<form method="post">
+    <p>
+        <button name="button2">Reset demo page</button>
     </p>
 </form>
 <br>
+<a href="index.php"><button>Return</button></a>
 
+<p style="font-size:14px">You may need to reset the demo page before returning (i.e. there is an unavoidable redirect).</p>
 <p style="font-size:10px"><a href="https://www.keaneokelley.com">Keane was here.</a></p>
 
 

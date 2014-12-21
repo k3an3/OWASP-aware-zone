@@ -1,8 +1,10 @@
-
-
-
-
-Secret=Your super secret session ID=127.0.0.1
-Secret=Your super secret session ID=127.0.0.1; SuperSecretCookie=127.0.0.1
-Secret=Your super secret session ID=127.0.0.1; SuperSecretCookie=127.0.0.1
-Secret=Your super secret session ID=192.168.1.253; SuperSecretCookie=192.168.1.253
+SuperSecretCookie=127.0.0.1
+SuperSecretCookie=127.0.0.1
+SuperSecretCookie=127.0.0.1dsfsdf
+SuperSecretCookie=127.0.0.1dsfsdf
+SuperSecretCookie=127.0.0.1dsfsdf
+SuperSecretCookie=127.0.0.1dsfsdf
+SuperSecretCookie=127.0.0.1dsfsdf
+SuperSecretCookie=127.0.0.1dsfsdf
+SuperSecretCookie=127.0.0.1dsfsdf
+SuperSecretCookie=127.0.0.1dsfsdf

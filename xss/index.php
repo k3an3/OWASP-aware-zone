@@ -10,7 +10,6 @@ setcookie("SuperSecretCookie", $_SERVER['REMOTE_ADDR'], time() + 3600);
 <body>
 <h1>Very Flashy and Complicated Website 2</h1>
 <p>Welcome to my site. This site has extreme security. My site can't be hacked.</p>
-<p>How awesome am I??</p>
 
 <form action="index.php" id="coolForm" method="post">
 Leave me a comment: <input type="text" name="cool">
