@@ -10,10 +10,10 @@
 <br/>See if you can send a user's cookie using a GET request to this page using the GET field called 'cookie'.</p>
 <?php
 if (isset($_GET['cookie']) && !isset($_POST['button'])) {
-	file_put_contents("cookies.txt", trim($_GET["cookie"]).PHP_EOL, FILE_APPEND);
+	file_put_contents("cookies.txt", trim($_GET["cookie"]), FILE_APPEND);
 } 
 if (isset($_POST['button'])) {
-      exec('cat /dev/null > list.txt');
+      exec('cat /dev/null > cookies.txt');
       echo "Reset Complete!";
 }
 ?>
