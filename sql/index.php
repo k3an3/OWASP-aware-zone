@@ -35,7 +35,7 @@ if($loggedin === TRUE) {?>
     <br>
 <?php
 } else { 
-     echo "<br/>You are not logged in. Log in or create an account in order to post.";
+     echo '<br/>You are not logged in. <a href="login.php">Log in</a> or <a href="newaccount.php">create an account</a> in order to post.<br/>';
 }
 if (isset($_POST['cool']) && !isset($_POST['button'])) {
 	echo "<h1>Thanks for posting!</h1><br/>";
@@ -45,8 +45,11 @@ if (isset($_POST['cool']) && !isset($_POST['button'])) {
 } 
 if (isset($_POST['button']))
 {
-      exec('cat /dev/null > list.txt');
-	      echo "Reset Complete!";
+	$reset = mysqli_query($conn, "Truncate table Comments");
+	if (!$reset) {
+	     die('Reset error: ' . mysqli_error($conn));
+	 }
+	echo "Reset Complete!";
 }
 ?>
 <br><br>
@@ -65,6 +68,9 @@ if (!isset($_POST['button'])) {
 	
 	echo "<br/>";
 }
+echo "<a href='index.php?page=" . ($page - 1) . "'><button>Previous page</button></a>";
+echo "<a href='index.php?page=" . ($page + 1) . "'><button>Next page</button></a>";
+
 ?>
 
 <form method="post">
@@ -80,10 +86,7 @@ if (!isset($_POST['button'])) {
 if(isset($_GET['hint'])) {
 ?>
 <div class="hint">
-Since the user input is not stripped or validated, any HTML you type into the text field will be rendered on the page as if it was part of the source. Try adding some text inside header tags, such as
-"<?php echo htmlspecialchars('<h1>Hello World!</h1>'); ?>" to show how you can manipulate the text. You could also try to add images or even embed YouTube videos. While none of this is particularily malicious, there are plenty of harmful things that can be done.
-You could try to insert an HTML or Javascript redirect, which would send users to a different page without them even noticing. Even worse, you could use Javascript to steal cookie values
-and send them to a different website for harvesting. A <a href="cookiecollector.php">Cookie Collector</a> page has been provided for testing this.
+Insert hint here.
 </div>
 <?php
 }
