@@ -5,21 +5,24 @@
 </head>
 <body bgcolor="#000000" text="#00FF00">
 <h1>Demos</h1>
-
+<div class="ul">
 <ul>
-	<li><a href="burpsuite/index.php" style="color:white">Burp Suite Demo</a>
+	<li><a href="burpsuite/index.php" style="color:white">Client-Side Validation Demo</a>
 	<p>Demonstrates the importance of server-side input validation. The demo uses JavaScript to verify user input 
 	(to make sure the text contains the string "awesome"), but this can be easily beaten by disabling JavaScript or using a 
 	browser proxy tool such as <a href="http://portswigger.net/burp/Burpsuite." style="color:white">Burp Suite</a> to edit the 
 	request post-JavaScript-validation. See <a href="https://blog.keaneokelley.com/client-vs-server-side-input-validation-demo/">this write-up</a> for more information.</p></li>
 	<li><a href="xss/index.php" style="color:white">XSS Demo</a>
-	<p>As a contender on the <a href="https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_%28XSS%29">OWASP Top 10</a>, XSS (Cross-site-scripting) is a 
+	<p><a href="https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_%28XSS%29">XSS (Cross-site-scripting)</a> is a 
 	well-known and dangerous vulnerability. XSS is possible when a site allows arbitrary HTML to be injected into the page, usually a result of a poorly-sanitized input form.
 	Since the injected HTML is rendered exactly like the rest of the page, there are no limits on what can be done. For example, script tags can be injected, redirecting users
 	to malicious phishing pages or stealing their non-http-only session cookies.</p></li>
+	<li><a href="sql/index.php" style="color:white">SQL Injection Demo</a>
+	<p><a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> occurs when a website uses an SQL database but fails to sanitize the inputs, meaning a malicious user would be able to execute arbitrary SQL commands.
+	SQL injection allows an attacker to fully manipulate the contents of the database, and sometimes even use it to attack other parts of the server.</p></li>
 	<li>More to come soon!</li>
 </ul>
-
+</div>
 <p>View these demos on GitHub <a href="https://www.github.com/keaneokelley/OWASP-aware-zone">here</a>.</p>
 <p style="font-size:10px">Copyright &copy; Keane O'Kelley 2014 <a href="https://www.keaneokelley.com">www.keaneokelley.com</a></p>
 </body>

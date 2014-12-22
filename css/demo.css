@@ -5,3 +5,16 @@
   font-size: 15px;
   padding: 5px;
 } 
+
+.ul {
+   /* unvisited link */
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: gray;
+}
+  
+}
