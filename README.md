@@ -6,4 +6,4 @@ The basic requirements for this webapp are nginx/Apache, PHP, and MySQL. MySQL w
 
 Disclaimer:
 These demos are provided for learning purposes only. None of the pages or code may be used to carry out actual attacks against real websites or people. I am not responsible
-for anything you decide to do with the provided knowledge.
+for anything you decide to do with the provided knowledge. Also, do not use any of this code in production.
