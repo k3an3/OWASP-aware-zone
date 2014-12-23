@@ -55,7 +55,7 @@ if(!isset($_GET['page'])) {
     $page = $_GET['page'];
 }
 if($loggedin) {
-   echo "Logged in as " . $username .".<br/><br/>";
+   echo "Logged in as " . $username .". <a href='profile.php'>View Profile</a> <a href='logout.php'>Log out</a><br/><br/>";
 ?>
     <form action="index.php" id="coolForm" method="post">
     Leave me a comment:<br/><input type="text" placeholder="Title" name="title"><br>
@@ -69,8 +69,8 @@ if($loggedin) {
      echo '<br/>You are not logged in. <a href="login.php">Log in</a> or <a href="newaccount.php">create an account</a> in order to post.<br/>';
 }
 if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button'])) {
-	$title = $_POST['title'];
-	$body = $_POST['body'];
+	$title = trim($_POST['title']);
+	$body = trim($_POST['body']);
 	echo "<h1>Thanks for posting!</h1><br/>";
 	$result = mysqli_query($conn, "INSERT INTO Comments (Title, Body, User) values ('$title', '$body', '$username')");
 	if (!$result) 
@@ -78,11 +78,16 @@ if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button
 } 
 if (isset($_POST['button']))
 {
-	$reset = mysqli_query($conn, "Truncate table Comments");
-	if (!$reset) {
-	     die('Reset error: ' . mysqli_error($conn));
-	 }
-	echo "Reset Complete!";
+	mysqli_query($conn, "DROP TABLE Comments, Users, Sessions");
+	mysqli_query($conn, "CREATE TABLE Comments (page int not null auto_increment, Title varchar(255), Body varchar(1024), User varchar(255), primary key (page))");
+	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), primary key(ID))");
+	mysqli_query($conn, "CREATE TABLE Sessions (username varchar(255), sessionID varchar(255))");
+	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User) values('Hello World', 'This is simply a test post.', 'root')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret) values('root', 'root', 'empty')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret) values('sally', 'letmein', 'empty')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret) values('johnny', 'qwerty123', 'empty')");
+	echo "<br/>Reset Complete! Refreshing...<br/>";
+	echo '<meta http-equiv="refresh" content="2;URL=index.php?page=1">';
 }
 ?>
 <br><br>
@@ -97,7 +102,7 @@ if (!isset($_POST['button'])) {
 	    die('MySQL Error 2: ' . mysqli_error($conn));
 	}
 	$data = mysqli_fetch_array($result, MYSQL_ASSOC);
-	echo "<h2>" . trim($data['Title']) . "</h2><br/><p>" . trim($data['Body']) . "<br/><br/>";
+	echo "<h2>" . $data['Title'] . "</h2><br/><p>" . $data['Body'] . "<br/><br/>";
 	echo "<i>Posted by {$data['User']}</i><br/>";	
 	echo "<br/>";
 }
@@ -106,7 +111,7 @@ echo "<a href='index.php?page=" . ($page + 1) . "'><button>Next page</button></a
 
 ?>
 </div>
-<form method="post">
+<form method="post" action="index.php?page=1">
     <p>
         <button name="button">Reset</button>
     </p>
