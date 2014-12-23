@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Login</title>
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
 </head>
 <body>
 <h1>Login</h1>
@@ -28,9 +29,17 @@ if($_POST['user'] !== null || $_POST['pass'] !== null) {
      $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) * time() * 17 + $data['ID']; 
      $result = mysqli_query($conn, "INSERT INTO Sessions (username, sessionID) values('$username', '$session')");
      if (!$result) 
-	die("Could not create a session. MySQL Error: " . mysqli_error($conn));
+	die("Could not create a session. " . mysqli_error($conn));
      echo "Logged in as " . $username . ". Redirecting...";
      echo '<meta http-equiv="refresh" content="0;URL=index.php?session=' . $session . '">';
+}
+echo '<br/><a href="login.php?hint=true">Hint</a>';
+if(isset($_GET['hint'])) {
+?>
+<div class="hint">
+It is very likely that the Users are stored in the database. Is there any way to trick the website into thinking we should be able to log in?
+</div>
+<?php
 }
 ?>
 </body>

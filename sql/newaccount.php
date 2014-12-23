@@ -23,7 +23,8 @@ else {
     if (!$conn) 
 	die("Failed to connect to MySQL: " . mysqli_error($conn));
     mysqli_select_db($conn, 'sqldemo');
-    $result = mysqli_query($conn, "INSERT INTO Users (Name, Password, Secret) VALUES('$username', '$password', 'None')");
+    $date = date('l F jS Y');
+    $result = mysqli_query($conn, "INSERT INTO Users (Name, Password, Secret, numposts, datejoined) VALUES('$username', '$password', 'None', 0, '$date')");
     if(!$result)
 	die("Failed to add user. MySQL Error: " . mysqli_error($conn));
     echo 'User added successfully! You may now proceed to <a href="login.php">login</a>.';
