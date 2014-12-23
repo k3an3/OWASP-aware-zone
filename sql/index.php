@@ -4,6 +4,7 @@ if(!$conn) {
   die('MySQL Error: ' . mysqli_error($conn));
 }
 mysqli_select_db($conn, 'sqldemo');
+$loggedin = false;
 if(isset($_COOKIE['session'])) {
   $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = {$_COOKIE['session']}");
   if(mysqli_num_rows($res) > 0) {
@@ -25,9 +26,7 @@ if(isset($_GET['session']) && !$loggedin) {
       unset($_COOKIE['session']);
   setcookie("session", $session, time() + 3600);
   $loggedin = true;
-} else {
-  $loggedin = false;
-}
+} 
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -136,10 +135,8 @@ if($loggedin) { ?>
     </p>
 </form>
 <br>
-
-<a href="index.php?hint=true">Hint</a>
-
 <?php 
+echo '<a href="index.php?page=' . $page . '&hint=true">Hint</a>';
 if(isset($_GET['hint'])) {
 ?>
 <div class="hint">
