@@ -74,14 +74,14 @@ if (isset($_POST['button']))
 {
 	mysqli_query($conn, "DROP TABLE Comments, Users, Sessions");
 	mysqli_query($conn, "CREATE TABLE Comments (page int not null auto_increment, Title varchar(255), Body varchar(1024), User varchar(255), Date varchar(255), primary key (page))");
-	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), primary key(ID))");
+	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), numposts int, datejoined varchar(255), primary key(ID))");
 	mysqli_query($conn, "CREATE TABLE Sessions (username varchar(255), sessionID varchar(255))");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Hello World', 'This is simply a test post.', 'root', 'the Moon')");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Small Update', 'Just wanted everyone to know that I discovered this thing called the internet. It is pretty amazing indeed!', 'sally', 'Monday 15th December 2014 07:49:32 PM')");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('So Much Fun!', 'Since Sally discovered the internet last week, I have learned so much. I especially liked learning HTML. <b>Making secure websites is so easy!</b>', 'johnny', 'Wednesday 24th December 2014 11:11:54 PM')");
-	mysqli_query($conn, "INSERT INTO Users (Name, password, secret) values('root', 'root', 'empty')");
-	mysqli_query($conn, "INSERT INTO Users (Name, password, secret) values('sally', 'letmein', 'empty')");
-	mysqli_query($conn, "INSERT INTO Users (Name, password, secret) values('johnny', 'qwerty123', 'empty')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('root', 'root', 'empty', 1, 'the past')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('sally', 'letmein', 'empty', 1, 'Monday December 15th 2014')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('johnny', 'qwerty123', 'empty', 1, 'Wednesday December 24th 2014')");
 	echo "<br/>Reset Complete! Refreshing...<br/>";
 	echo '<meta http-equiv="refresh" content="2;URL=index.php?page=1">';
 }
@@ -104,7 +104,7 @@ if (!isset($_POST['button'])) {
 	    echo "Page not found.";
 	else {
 	    echo "<h2>" . $data['Title'] . "</h2><p>" . $data['Body'] . "<br/><br/>";
-	    echo "<i>Posted by {$data['User']} on {$data['Date']}</i><br/>";	
+	    echo "<i>Posted by <a href='profile.php?user={$data['User']}'>{$data['User']}</a> on {$data['Date']}</i><br/>";	
 	    echo "<br/>";
 	}
 }
