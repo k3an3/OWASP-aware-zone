@@ -64,6 +64,8 @@ URL with the actual cookie value. We can use XSS to do this automatically whenev
 currently access in your browser. It is trivial to access these values; now you just have to send them to this page using some kind of Javascript trickery.
 If you get stuck, there are some useful examples in the Cross Site Scripting section of
 <a href="https://www.owasp.org/index.php/Testing_for_AJAX_Vulnerabilities_%28OWASP-AJ-001%29">this page</a>.
+
+For even more practice, try using this page on user accounts in the 'SQL Injection Demo'.
 </div>
 <?php
 }

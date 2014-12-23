@@ -143,7 +143,11 @@ if($loggedin) { ?>
 if(isset($_GET['hint'])) {
 ?>
 <div class="hint">
-Insert hint here.
+Notice the url bar when selecting a page. Looking at "index.php?page=1", the page number changes whenever we try to request a different page. This means that the value at the end
+is being passed in as a GET variable. Oftentimes with this setup, an SQL database is what actually holds each page. Knowing this, an SQL command will need to be issued somewhere in
+order to retrieve the page we want. Is the page number being directly inserted into an SQL command? If so, what happens when we replace the page number with SQL commands? 
+
+The posts might not be the only thing stored in the database. What else does the site need to keep track of? 
 </div>
 <?php
 }
