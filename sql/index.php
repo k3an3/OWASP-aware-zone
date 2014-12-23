@@ -64,24 +64,24 @@ if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button
 	$body = trim($_POST['body']);
 	$date = date('l F jS Y h:i:s A');
 	$result = mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values ('$title', '$body', '$username', '$date')");
-	$res = mysqli_query($conn, "SELECT * FROM Comments");
-	echo "<h1>Thanks for posting!</h1><a href='index.php?page=" . mysqli_num_rows($res) . "'>View post</a><br/>";
 	if (!$result) 
 	    die("Failed to post. MySQL Error: " . mysqli_error($conn));
-	
+	$res = mysqli_query($conn, "SELECT * FROM Comments");
+	echo "<h1>Thanks for posting!</h1><a href='index.php?page=" . mysqli_num_rows($res) . "'>View post</a><br/>";
 } 
 if (isset($_POST['button'])) {
 	mysqli_query($conn, "DROP TABLE Comments, Users, Sessions");
 	mysqli_query($conn, "CREATE TABLE Comments (page int not null auto_increment, Title varchar(255), Body varchar(1024), User varchar(255), Date varchar(255), primary key (page))");
 	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), numposts int, datejoined varchar(255), primary key(ID))");
 	mysqli_query($conn, "CREATE TABLE Sessions (username varchar(255), sessionID varchar(255))");
-	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Hello World', 'This is simply a test post.', 'root', 'the Moon')");
+	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Hello World', 'This is simply a test post.', 'root', 'Sunday 14th December 2014 06:35:22 PM')");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Small Update', 'Just wanted everyone to know that I discovered this thing called the internet. It is pretty amazing indeed!', 'sally', 'Monday 15th December 2014 07:49:32 PM')");
-	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('So Much Fun!', 'Since Sally discovered the internet last week, I have learned so much. I especially liked learning HTML. <b>Making secure websites is so easy!</b>', 'johnny', 'Wednesday 24th December 2014 11:11:54 PM')");
+	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('So Much Fun!', 'Since Sally discovered the internet last week, I have learned so much. I especially liked learning HTML and SQL. <b>Making secure websites is so easy!</b>', 'johnny', 'Wednesday 24th December 2014 11:11:54 PM')");
+	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Hello Again', 'Just another little <i>test</i> by Johnny. I think something is wrong with this site...', 'nobody', 'the Moon')-- -', 'johnny', 'Wednesday 24th December 2014 11:52:01 PM')");
 	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('root', 'root', 'I am root', '1', 'the past')");
 	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('sally', 'letmein', 'Nobody tell my Mom that I found this...', '1', 'Monday December 15th 2014')");
 	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('johnny', 'qwerty123', 'I think I may have hacked this site...', '1', 'Wednesday December 24th 2014')");
-	echo "<br/>Reset Complete! Refreshing...<br/>";
+	echo "<br/><div class='msg'>Reset Complete! Refreshing...</div><br/>";
 	echo '<meta http-equiv="refresh" content="2;URL=index.php?page=1">';
 }
 ?>
@@ -139,11 +139,14 @@ echo '<a href="index.php?page=' . $page . '&hint=true">Hint</a>';
 if(isset($_GET['hint'])) {
 ?>
 <div class="hint">
-Notice the url bar when selecting a page. Looking at "index.php?page=1", the page number changes whenever we try to request a different page. This means that the value at the end
+<p>Notice the url bar when selecting a page. Looking at "index.php?page=1", the page number changes whenever we try to request a different page. This means that the value at the end
 is being passed in as a GET variable. Oftentimes with this setup, an SQL database is what actually holds each page. Knowing this, an SQL command will need to be issued somewhere in
-order to retrieve the page we want. Is the page number being directly inserted into an SQL command? If so, what happens when we replace the page number with SQL commands? 
+order to retrieve the page we want. Is the page number being directly inserted into an SQL command? If so, what happens when we replace the page number with SQL commands?</p>
 
-The posts might not be the only thing stored in the database. What else does the site need to keep track of? 
+<p>Since the posts are stored in a database, can we mess with the insert command if we add SQL commands to a post? Is there a way to escape the text and make it think you are 
+issuing part of the query? Look at the SQL queries in the code, and think about apostrophes. Keep in mind that you can use an SQL comment "-- -" to remove the rest of a query.</p>
+
+<p>The posts might not be the only thing stored in the database. What else does the site need to keep track of?</p>
 </div>
 <?php
 }
