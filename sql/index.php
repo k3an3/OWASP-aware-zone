@@ -108,9 +108,9 @@ if (!isset($_POST['button'])) {
 	}
 }
 if($page - 1 > 0)
-    echo "<a href='index.php?page=" . ($page + 1) . "'><button>Previous page</button></a>";
+    echo "<a href='index.php?page=" . ($page - 1) . "'><button>Previous page</button></a>";
 if($page + 1 <= $rows)
-    echo "<a href='index.php?page=" . ($page - 1) . "'><button>Next page</button></a>";
+    echo "<a href='index.php?page=" . ($page + 1) . "'><button>Next page</button></a>";
 ?>
 </div> <?php
 echo "Goto page:</br>";	
