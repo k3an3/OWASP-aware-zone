@@ -9,6 +9,7 @@ These demos are provided for learning purposes only. None of the pages or code m
 for anything you decide to do with the provided knowledge. Also, do not use any of this code in production.
 
 Demos:
+=====
 <li><a href="burpsuite/index.php" style="color:white">Client-Side Validation Demo</a>
 	<p>Demonstrates the importance of server-side input validation. The demo uses JavaScript to verify user input 
 	(to make sure the text contains the string "awesome"), but this can be easily beaten by disabling JavaScript or using a 
