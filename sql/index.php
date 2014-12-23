@@ -4,15 +4,28 @@ if(!$conn) {
   die('MySQL Error: ' . mysqli_error($conn));
 }
 mysqli_select_db($conn, 'sqldemo');
-if(isset($_GET['session'])) {
+if(isset($_COOKIE['session'])) {
+  $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = {$_COOKIE['session']}");
+  if(mysqli_num_rows($res) > 0) {
+      $data = mysqli_fetch_assoc($res);
+      $username = $data['username'];
+      $loggedin = true;
+  } else {
+      $loggedin = false;
+  }
+}
+else if(isset($_GET['session'])) {
   $session = $_GET['session'];
   $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = $session");
   if(!$res)
       die("Unable to log in. " . mysqli_error($conn));
   $data = mysqli_fetch_assoc($result);
   $username = $data['username'];
-  echo "<script>alert('$username logged in');</script>";
+  echo "<script>alert('$username logged in - $session');</script>";
   setcookie("session", $session, time() + 3600);
+  $loggedin = true;
+} else {
+  $loggedin = false;
 }
 ?>
 <!DOCTYPE HTML>
@@ -41,9 +54,8 @@ if(!isset($_GET['page'])) {
 } else {
     $page = $_GET['page'];
 }
-if($_GET['username']) {
-    $user = $_GET['username'];
-    echo "Logged in as " . $user .".<br/><br/>";
+if($loggedin) {
+   echo "Logged in as " . $username .".<br/><br/>";
 ?>
     <form action="index.php" id="coolForm" method="post">
     Leave me a comment:<br/><input type="text" placeholder="Title" name="title"><br>
@@ -60,7 +72,7 @@ if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button
 	$title = $_POST['title'];
 	$body = $_POST['body'];
 	echo "<h1>Thanks for posting!</h1><br/>";
-	$result = mysqli_query($conn, "INSERT INTO Comments (Title, Body, User) values ('$title', '$body', '$user')");
+	$result = mysqli_query($conn, "INSERT INTO Comments (Title, Body, User) values ('$title', '$body', '$username')");
 	if (!$result) 
 	    die("Failed to post. MySQL Error: " . mysqli_error($conn));
 } 
