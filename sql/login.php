@@ -26,10 +26,12 @@ else {
     $result = mysqli_query($conn, "SELECT * FROM Users WHERE Name = '$username' AND password = '$password'");
     if(!$result)
 	die("Could not find a user with that username and password combination.");
-     session_name($username . time());
-     session_start();
+     $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) * time() + 42; 
+     $result = mysqli_query($conn, "INSERT INTO Sessions (username, sessionID) values('$username', '$session')");
+     if (!$result) 
+	die("Could not create a session. MySQL Error: " . mysqli_error($conn));
      echo "Logged in as " . $username . ". Redirecting...";
-     echo "<meta http-equiv="refresh" content="0;URL=index.php">"
+     echo '<meta http-equiv="refresh" content="0;URL=index.php?session=' . $session . '">';
 }
 ?>
 </body>

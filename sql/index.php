@@ -1,5 +1,19 @@
-<?php
-setcookie("SuperSecretCookie", $_SERVER['REMOTE_ADDR'], time() + 3600);
+<?php 
+$conn = mysqli_connect('localhost', 'username', 'password');
+if(!$conn) {
+  die('MySQL Error: ' . mysqli_error($conn));
+}
+mysqli_select_db($conn, 'sqldemo');
+if(isset($_GET['session'])) {
+  $session = $_GET['session'];
+  $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = $session");
+  if(!$res)
+      die("Unable to log in. " . mysqli_error($conn));
+  $data = mysqli_fetch_assoc($result);
+  $username = $data['username'];
+  echo "<script>alert('$username logged in');</script>";
+  setcookie("session", $session, time() + 3600);
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -21,27 +35,34 @@ mysqli_select_db($conn, 'sqldemo');
 <p>Welcome to my site. This site has extreme security. I have learned how to do everything with MySQL. My site can't be hacked.</p>
 
 
-<?php 
+<?php
 if(!isset($_GET['page'])) {
-    $page = 0;
+    $page = 1;
 } else {
     $page = $_GET['page'];
 }
-if($loggedin === TRUE) {?>
+if($_GET['username']) {
+    $user = $_GET['username'];
+    echo "Logged in as " . $user .".<br/><br/>";
+?>
     <form action="index.php" id="coolForm" method="post">
-    Leave me a comment: <input type="text" name="cool">
+    Leave me a comment:<br/><input type="text" placeholder="Title" name="title"><br>
+    <textarea type="text" placeholder="Message" name="body" rows="6"></textarea><br/>
     <input type="submit" value="submit">
     </form>
     <br>
+    
 <?php
 } else { 
      echo '<br/>You are not logged in. <a href="login.php">Log in</a> or <a href="newaccount.php">create an account</a> in order to post.<br/>';
 }
-if (isset($_POST['cool']) && !isset($_POST['button'])) {
+if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button'])) {
+	$title = $_POST['title'];
+	$body = $_POST['body'];
 	echo "<h1>Thanks for posting!</h1><br/>";
-	echo "You said: "; 
-	echo $_POST["cool"]; 
-	file_put_contents("list.txt", trim($_POST["cool"]).PHP_EOL, FILE_APPEND);
+	$result = mysqli_query($conn, "INSERT INTO Comments (Title, Body, User) values ('$title', '$body', '$user')");
+	if (!$result) 
+	    die("Failed to post. MySQL Error: " . mysqli_error($conn));
 } 
 if (isset($_POST['button']))
 {
@@ -54,25 +75,25 @@ if (isset($_POST['button']))
 ?>
 <br><br>
 
-</body>
+<div class="post">
 
 <?php 
 if (!isset($_POST['button'])) {
-	echo "<b>List of things people have said:</b><br/>\n";
-	$result = mysqli_query($conn, "SELECT $page FROM Comments");
+	echo "<b>Page $page:</b><br/>\n";
+	$result = mysqli_query($conn, "SELECT * FROM Comments WHERE page = '$page'");
 	if(!$result) {
 	    die('MySQL Error 2: ' . mysqli_error($conn));
 	}
-	$data = mysql_fetch_array($result, MYSQL_ASSOC);
-	echo "<h2>{$data['Title']}</h2><br/><p>{$data['Body']}";
-	
+	$data = mysqli_fetch_array($result, MYSQL_ASSOC);
+	echo "<h2>" . trim($data['Title']) . "</h2><br/><p>" . trim($data['Body']) . "<br/><br/>";
+	echo "<i>Posted by {$data['User']}</i><br/>";	
 	echo "<br/>";
 }
 echo "<a href='index.php?page=" . ($page - 1) . "'><button>Previous page</button></a>";
 echo "<a href='index.php?page=" . ($page + 1) . "'><button>Next page</button></a>";
 
 ?>
-
+</div>
 <form method="post">
     <p>
         <button name="button">Reset</button>
@@ -94,5 +115,5 @@ Insert hint here.
 
 <p style="font-size:10px"><a href="https://www.keaneokelley.com">Keane was here.</a></p>
 
-
+</body>
 </html>
