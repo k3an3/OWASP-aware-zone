@@ -21,6 +21,8 @@ if(isset($_GET['session']) && !$loggedin) {
       die("Unable to log in. " . mysqli_error($conn));
   $data = mysqli_fetch_assoc($res);
   $username = $data['username'];
+  if(isset($_COOKIE['session']))
+      unset($_COOKIE['session']);
   setcookie("session", $session, time() + 3600);
   $loggedin = true;
 } else {
