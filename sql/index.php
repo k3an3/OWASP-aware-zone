@@ -117,13 +117,16 @@ echo "Goto page:</br>";
 for($i = 1; $i <= $rows; $i++) {
     echo "<a href='index.php?page=$i'>$i</a> ";
 }
-?>
+if($loggedin) { ?>
  <form action="index.php" id="coolForm" method="post">
     <br>Leave me a comment:<br/><input type="text" placeholder="Title" name="title"><br>
     <textarea type="text" placeholder="Message" name="body" rows="6"></textarea><br/>
     <input type="submit" value="submit">
     </form>
     <br>
+<?php 
+}
+?>
 
 <form method="post" action="index.php?page=1">
     <p>
