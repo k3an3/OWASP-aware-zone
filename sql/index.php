@@ -19,7 +19,7 @@ else if(isset($_GET['session'])) {
   $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = $session");
   if(!$res)
       die("Unable to log in. " . mysqli_error($conn));
-  $data = mysqli_fetch_assoc($result);
+  $data = mysqli_fetch_assoc($res);
   $username = $data['username'];
   setcookie("session", $session, time() + 3600);
   $loggedin = true;
