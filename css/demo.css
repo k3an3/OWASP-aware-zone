@@ -13,3 +13,10 @@
   background-color: #c5d8fb;
   width: 500px;
 }
+
+.msg {
+  border: 1px solid black;
+  padding: 3px;
+  color: #FF0000;
+  width: 300px;
+}
