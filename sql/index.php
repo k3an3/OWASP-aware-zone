@@ -70,8 +70,7 @@ if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button
 	    die("Failed to post. MySQL Error: " . mysqli_error($conn));
 	
 } 
-if (isset($_POST['button']))
-{
+if (isset($_POST['button'])) {
 	mysqli_query($conn, "DROP TABLE Comments, Users, Sessions");
 	mysqli_query($conn, "CREATE TABLE Comments (page int not null auto_increment, Title varchar(255), Body varchar(1024), User varchar(255), Date varchar(255), primary key (page))");
 	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), numposts int, datejoined varchar(255), primary key(ID))");
@@ -79,9 +78,9 @@ if (isset($_POST['button']))
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Hello World', 'This is simply a test post.', 'root', 'the Moon')");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Small Update', 'Just wanted everyone to know that I discovered this thing called the internet. It is pretty amazing indeed!', 'sally', 'Monday 15th December 2014 07:49:32 PM')");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('So Much Fun!', 'Since Sally discovered the internet last week, I have learned so much. I especially liked learning HTML. <b>Making secure websites is so easy!</b>', 'johnny', 'Wednesday 24th December 2014 11:11:54 PM')");
-	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('root', 'root', 'empty', '1', 'the past')");
-	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('sally', 'letmein', 'empty', '1', 'Monday December 15th 2014')");
-	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('johnny', 'qwerty123', 'empty', '1', 'Wednesday December 24th 2014')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('root', 'root', 'I am root', '1', 'the past')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('sally', 'letmein', 'Nobody tell my Mom that I found this...', '1', 'Monday December 15th 2014')");
+	mysqli_query($conn, "INSERT INTO Users (Name, password, secret, numposts, datejoined) values('johnny', 'qwerty123', 'I think I may have hacked this site...', '1', 'Wednesday December 24th 2014')");
 	echo "<br/>Reset Complete! Refreshing...<br/>";
 	echo '<meta http-equiv="refresh" content="2;URL=index.php?page=1">';
 }
