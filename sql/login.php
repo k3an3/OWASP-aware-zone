@@ -5,8 +5,6 @@
 </head>
 <body>
 <h1>Login</h1>
-<?php
-if($_POST['user'] === null || $_POST['pass'] === null) { ?>
 <form method="post">
 <p>Username:</p>
 <input type="text" name="user">
@@ -15,8 +13,8 @@ if($_POST['user'] === null || $_POST['pass'] === null) { ?>
 <input type="submit" value="Submit">
 </form>
 
-<?php }
-else {
+<?php 
+if($_POST['user'] !== null || $_POST['pass'] !== null) {
     $username = $_POST['user'];
     $password = $_POST['pass'];
     $conn = mysqli_connect('localhost', 'username', 'password');
@@ -24,10 +22,10 @@ else {
 	die("Failed to connect to MySQL: " . mysqli_error($conn));
     mysqli_select_db($conn, 'sqldemo');
     $result = mysqli_query($conn, "SELECT * FROM Users WHERE Name = '$username' AND password = '$password'");
-    if(!$result)
-	die("Could not find a user with that username and password combination.");
+    if(mysqli_num_rows($result) == 0)
+	die("<br/>Could not find a user with that username and password combination.");
      $data = mysqli_fetch_assoc($result);
-     $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) * time() - 42 + $data['ID']; 
+     $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) * time() * 17 + $data['ID']; 
      $result = mysqli_query($conn, "INSERT INTO Sessions (username, sessionID) values('$username', '$session')");
      if (!$result) 
 	die("Could not create a session. MySQL Error: " . mysqli_error($conn));

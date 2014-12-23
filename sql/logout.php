@@ -13,6 +13,7 @@ if(isset($_COOKIE['session'])) {
 	 die("User does not appear to be logged in.");
     $username = $data['username'];
     $result = mysqli_query($conn, "DELETE FROM Sessions WHERE username = '$username'");
+    unset($_COOKIE['session']);
     if(!$result)
 	die("Could not log you out. " . mysqli_error($conn));
     echo "You have been successfully logged out. Redirecting...";

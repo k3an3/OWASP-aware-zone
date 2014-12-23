@@ -14,7 +14,7 @@ if(isset($_COOKIE['session'])) {
       $loggedin = false;
   }
 }
-else if(isset($_GET['session'])) {
+if(isset($_GET['session']) && !$loggedin) {
   $session = $_GET['session'];
   $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = $session");
   if(!$res)
