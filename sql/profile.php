@@ -39,7 +39,7 @@ echo "<head><title>$username's Profile</title>";
 echo "<h1>$username's Profile</h1>";
 echo "Date joined: {$data['datejoined']}<br/>";
 echo "Total posts: {$data['numposts']}<br/><br/>";
-if($loggedinas !== null) {
+if($loggedinas === $username) {
     echo "<h2>Account Management</h2>";
     echo "<div class='msg'>";
     if(isset($_POST['secret']) && strlen($_POST['secret']) > 0) {
