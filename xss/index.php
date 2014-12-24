@@ -26,7 +26,7 @@ if (isset($_POST['cool']) && !isset($_POST['button'])) {
 } 
 ?>
 <?php
-    if (isset($_POST['button']))
+    if (isset($_POST['button']) || $_GET['reset'] === 'true')
     {
          exec('cat /dev/null > list.txt');
 		 echo "Reset Complete!";
