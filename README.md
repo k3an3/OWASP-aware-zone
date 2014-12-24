@@ -27,6 +27,5 @@ Demos:
 	<li><a href="sql/index.php" style="color:white">SQL Injection Demo</a>
 	<p><a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> occurs when a website uses an SQL database but fails to sanitize the inputs, meaning a malicious user would be able to execute arbitrary SQL commands.
 	SQL injection allows an attacker to fully manipulate the contents of the database, and sometimes even use it to attack other parts of the server.</p></li>
-	
 	<li>Coming soon: CSRF and more!</li>
 </ul>
