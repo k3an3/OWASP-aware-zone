@@ -6,6 +6,8 @@ It's been done many times before, but I just had to do it myself. The goal of th
 
 The basic requirements for this webapp are nginx/Apache, PHP, and MySQL. MySQL will need a database called 'sqldemo' which is controlled by a user with login details as username:password @ localhost. The SQL Injection demo will automatically create the required tables once you press its 'reset' button. Many of the demos use .txt files to store things. Permissions will need to be set such that the webserver can read and write to these files.
 
+Most demos can be recovered simply by pressing the 'reset' button or by passing "?reset=true" into the URL bar.
+
 Disclaimer:
 These demos are provided for learning purposes only. None of the pages or code may be used to carry out actual attacks against real websites or people. I am not responsible
 for anything you decide to do with the provided knowledge. Also, do not use any of this code in production.
@@ -25,5 +27,6 @@ Demos:
 	<li><a href="sql/index.php" style="color:white">SQL Injection Demo</a>
 	<p><a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> occurs when a website uses an SQL database but fails to sanitize the inputs, meaning a malicious user would be able to execute arbitrary SQL commands.
 	SQL injection allows an attacker to fully manipulate the contents of the database, and sometimes even use it to attack other parts of the server.</p></li>
+	
 	<li>Coming soon: CSRF and more!</li>
 </ul>
