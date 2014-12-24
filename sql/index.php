@@ -71,8 +71,8 @@ if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button
 } 
 if (isset($_POST['button'])) {
 	mysqli_query($conn, "DROP TABLE Comments, Users, Sessions");
-	mysqli_query($conn, "CREATE TABLE Comments (page int not null auto_increment, Title varchar(255), Body varchar(1024), User varchar(255), Date varchar(255), primary key (page))");
-	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), numposts int, datejoined varchar(255), primary key(ID))");
+	mysqli_query($conn, "CREATE TABLE Comments (page int not null auto_increment, Title varchar(255), Body varchar(1024), User varchar(255), Date varchar(255), test int, primary key (page))");
+	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), datejoined varchar(255), numposts int, primary key(ID))");
 	mysqli_query($conn, "CREATE TABLE Sessions (username varchar(255), sessionID varchar(255))");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Hello World', 'This is simply a test post.', 'root', 'Sunday 14th December 2014 06:35:22 PM')");
 	mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values('Small Update', 'Just wanted everyone to know that I discovered this thing called the internet. It is pretty amazing indeed!', 'sally', 'Monday 15th December 2014 07:49:32 PM')");
@@ -93,18 +93,15 @@ if (isset($_POST['button'])) {
 if (!isset($_POST['button'])) {
 	echo "<b>Page $page:</b><br/>\n";
 	$result = mysqli_query($conn, "SELECT * FROM Comments WHERE page = '$page'");
-	$res = mysqli_query($conn, "SELECT * FROM Comments");
 	if(!$result) {
-	    echo('MySQL Error: ' . mysqli_error($conn));
+	    echo 'MySQL Error: ' . mysqli_error($conn) . '<br/>';
 	}
+	$res = mysqli_query($conn, "SELECT * FROM Comments");
 	$rows = mysqli_num_rows($res);
-	$data = mysqli_fetch_array($result, MYSQL_ASSOC);
-	if(!$data)
-	    echo "Page not found.";
-	else {
-	    echo "<h2>" . $data['Title'] . "</h2><p>" . $data['Body'] . "<br/><br/>";
-	    echo "<i>Posted by <a href='profile.php?user={$data['User']}'>{$data['User']}</a> on {$data['Date']}</i><br/>";	
-	    echo "<br/>";
+	while($data = mysqli_fetch_assoc($result)) {
+		echo "<h2>" . $data['Title'] . "</h2><p>" . $data['Body'] . "<br/><br/>";
+		echo "<i>Posted by <a href='profile.php?user={$data['User']}'>{$data['User']}</a> on {$data['Date']}</i><br/>";	
+		echo "<br/>";
 	}
 }
 if($page - 1 > 0)
