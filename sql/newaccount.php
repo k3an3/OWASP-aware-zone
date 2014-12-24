@@ -14,6 +14,8 @@
 </form>
 
 <?php 
+/* Grab new account credentials from POST. Check the database to make sure that user doesn't already exist. If they don't exist, add a new entry to the database and let the user know
+they may now login. Passwords are not hashed or obscured at all. */
 if($_POST['user'] !== null || $_POST['pass'] !== null) {
     $username = $_POST['user'];
     $password = $_POST['pass'];

@@ -5,6 +5,7 @@
     if(!$conn)
 	die("Could not connect to database. " . mysqli_error($conn));
     mysqli_select_db($conn, 'sqldemo');
+/* See if user is logged in and provide appropriate options. */
 if(isset($_COOKIE['session'])) {
     $result = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = {$_COOKIE['session']}");
     if(!$result)
@@ -36,12 +37,15 @@ echo "<head><title>$username's Profile</title>";
 </head>
 <body>
 <?php
+/* Display basic profile statistics. */
 echo "<h1>$username's Profile</h1>";
 echo "Date joined: {$data['datejoined']}<br/>";
 echo "Total posts: {$data['numposts']}<br/><br/>";
+/* If the current profile's user matches the user that is logged in, show some account options. */
 if($loggedinas === $username) {
     echo "<h2>Account Management</h2>";
     echo "<div class='msg'>";
+    /* Allow the user to update their "secret" and change their password, or remove their account altogether. */
     if(isset($_POST['secret']) && strlen($_POST['secret']) > 0) {
 	$result = mysqli_query($conn, "UPDATE Users SET secret = '{$_POST['secret']}' WHERE Name = '$username'");
 	if(!$result)
@@ -59,7 +63,7 @@ if($loggedinas === $username) {
 	else
 	    echo "Successfully updated password.<br/>";
     }    
-    
+    /* Delete account from database and remove all sessions. */
     if (isset($_POST['delete'])) {
 	$result = mysqli_query($conn, "DELETE FROM Users WHERE Name = '$username'");
 	if(!$result)

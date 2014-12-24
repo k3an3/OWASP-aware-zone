@@ -15,6 +15,8 @@
 </form>
 
 <?php 
+/* Grab login information from POST. Check to see if there is a matching username and password in the database. If so, generate a unique sessionID and save it in the Sessions table.
+Otherwise, let the user know they can't log in. */
 if($_POST['user'] !== null || $_POST['pass'] !== null) {
     $username = $_POST['user'];
     $password = $_POST['pass'];

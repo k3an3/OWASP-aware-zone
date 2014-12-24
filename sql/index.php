@@ -1,10 +1,12 @@
 <?php 
+/* Code to handle authentication check. */
 $conn = mysqli_connect('localhost', 'username', 'password');
 if(!$conn) {
   die('MySQL Error: ' . mysqli_error($conn));
 }
 mysqli_select_db($conn, 'sqldemo');
 $loggedin = false;
+/* If user has a cookie, check to see if the sessionID is in our database. If so, they are logged in. */
 if(isset($_COOKIE['session'])) {
   $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = {$_COOKIE['session']}");
   if(mysqli_num_rows($res) > 0) {
@@ -15,6 +17,8 @@ if(isset($_COOKIE['session'])) {
       $loggedin = false;
   }
 }
+/* If the user doesn't have a cookie yet, see if a sessionID was sent as a GET variable.
+If so, see if it exists in the database and then set a cookie granting login. */
 if(isset($_GET['session']) && !$loggedin) {
   $session = $_GET['session'];
   $res = mysqli_query($conn, "SELECT * FROM Sessions WHERE sessionID = $session");
@@ -36,29 +40,26 @@ if(isset($_GET['session']) && !$loggedin) {
 <title>SQL Injection Demo</title>
 </head>
 
-<?php 
-$conn = mysqli_connect('localhost', 'username', 'password');
-if(!$conn) {
-  die('MySQL Error: ' . mysqli_error($conn));
-}
-mysqli_select_db($conn, 'sqldemo');
-?>
 <body>
 <h1>Very Flashy and Complicated Website 3</h1>
 <p>Welcome to my site. This site has extreme security. Now that I have learned how to do everything with MySQL, my site can't be hacked.</p>
 
 
 <?php
+/* Get the current page from the URL, otherwise it's page 1 */
 if(!isset($_GET['page'])) {
     $page = 1;
 } else {
     $page = $_GET['page'];
 }
+/* If the user is logged in, show profile and logout options, otherwise prompt for login or account creation. */
 if($loggedin) {
    echo "Logged in as " . $username .". <a href='profile.php'>View Profile</a> <a href='logout.php'>Log out</a><br/>";
 } else { 
      echo '<br/>You are not logged in. <a href="login.php">Log in</a> or <a href="newaccount.php">create an account</a> in order to post.<br/>';
 }
+
+/* Runs if a user has submitted the comment form. The comment is then inserted into the database with username and date/time added. */
 if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button'])) {
 	$title = trim($_POST['title']);
 	$body = trim($_POST['body']);
@@ -69,7 +70,10 @@ if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button
 	$res = mysqli_query($conn, "SELECT * FROM Comments");
 	echo "<h1>Thanks for posting!</h1><a href='index.php?page=" . mysqli_num_rows($res) . "'>View post</a><br/>";
 } 
-if (isset($_POST['button'])) {
+
+/* Runs if the reset button is pressed or the GET reset variable is set to true. Drops all database tables and rebuilds them from scratch, adding some sample users and comments. 
+Useful when the site has been nuked, or when setting up the demo for the first time. */
+if (isset($_POST['button']) || $_GET['reset'] === 'true') {
 	mysqli_query($conn, "DROP TABLE Comments, Users, Sessions");
 	mysqli_query($conn, "CREATE TABLE Comments (page int not null auto_increment, Title varchar(255), Body varchar(1024), User varchar(255), Date varchar(255), test int, primary key (page))");
 	mysqli_query($conn, "CREATE TABLE Users (ID int not null auto_increment, Name varchar(255), password varchar(255), secret varchar(255), datejoined varchar(255), numposts int, primary key(ID))");
@@ -90,6 +94,7 @@ if (isset($_POST['button'])) {
 <div class="post">
 
 <?php 
+/* Display the post from the current page using database queries. Allows for multiple rows to be printed... */
 if (!isset($_POST['button'])) {
 	echo "<b>Page $page:</b><br/>\n";
 	$result = mysqli_query($conn, "SELECT * FROM Comments WHERE page = '$page'");
@@ -104,6 +109,7 @@ if (!isset($_POST['button'])) {
 		echo "<br/>";
 	}
 }
+/* Conditionally show previous and next page buttons. */
 if($page - 1 > 0)
     echo "<a href='index.php?page=" . ($page - 1) . "'><button>Previous page</button></a>";
 if($page + 1 <= $rows)

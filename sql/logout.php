@@ -2,6 +2,8 @@
 <html>
 <body>
 <?php 
+/* See if user is logged in with a session cookie. If so, find their session in the database to confirm that it exists. If so, delete all of that user's sessions from the 
+table (harsh logout behaviour) and attempt to clear the session cookie, effectively logging them out. */
 if(isset($_COOKIE['session'])) {
     $conn = mysqli_connect('localhost', 'username', 'password');
     if (!$conn) 

