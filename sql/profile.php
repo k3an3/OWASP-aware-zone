@@ -27,7 +27,7 @@ $result = mysqli_query($conn, "SELECT * FROM Users WHERE Name = '$username'");
 if(!$result)
     die("Error retrieving profile. " . mysqli_error($conn));
 if(mysqli_num_rows($result) == 0)
-    die ("The user you requested doesn't exist.");
+    die ("<br/>The user you requested doesn't exist.");
 $data = mysqli_fetch_assoc($result);  
 
 echo "<head><title>$username's Profile</title>";
