@@ -33,16 +33,16 @@ Tell me that I'm awesome: <input type="text" name="cool">
 <input type="submit" value="submit">
 </form>
 <br>
-<?php 
+<?php
 if (isset($_POST['cool']) && !isset($_POST['button'])) {
 	echo "<h1>Thanks for the compliment!</h1><br/>";
-	echo "You said: "; 
-	echo htmlspecialchars($_POST["cool"]); 
+	echo "You said: ";
+	echo htmlspecialchars($_POST["cool"]);
 	file_put_contents("list.txt", trim($_POST["cool"]).PHP_EOL, FILE_APPEND);
-} 
+}
 ?>
 <?php
-    if (isset($_POST['button']))
+    if (isset($_POST['button'])|| $_GET['reset'] === 'true')
     {
          exec('cat /dev/null > list.txt');
 		 echo "Reset Complete!";
@@ -52,14 +52,14 @@ if (isset($_POST['cool']) && !isset($_POST['button'])) {
 
 </body>
 
-<?php 
+<?php
 if (!isset($_POST['button'])) {
 	echo "<b>List of Awesome things people have said about me:</b><br/>\n";
 	$lines = file("list.txt");
 	foreach ($lines as $line_num => $line) {
 	  echo "#<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
 	}
-	
+
 	echo "<br/>";
 }
 ?>
