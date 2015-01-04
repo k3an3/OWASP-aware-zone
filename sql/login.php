@@ -28,7 +28,7 @@ if($_POST['user'] !== null || $_POST['pass'] !== null) {
     if(mysqli_num_rows($result) == 0)
 	die("<br/>Could not find a user with that username and password combination.");
      $data = mysqli_fetch_assoc($result);
-     $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) * time() * 17 + $data['ID']; 
+     $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) / 1000 * time() * 17 + $data['ID']; 
      $result = mysqli_query($conn, "INSERT INTO Sessions (username, sessionID) values('$username', '$session')");
      if (!$result) 
 	die("Could not create a session. " . mysqli_error($conn));
