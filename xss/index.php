@@ -18,6 +18,7 @@ Leave me a comment: <input type="text" name="cool">
 </form>
 <br>
 <?php
+/* Take whatever the user posts, and save it to file. */
 if (isset($_POST['cool']) && !isset($_POST['button'])) {
 	echo "<h1>Thanks for posting!</h1><br/>";
 	echo "You said: "; 
@@ -37,6 +38,7 @@ if (isset($_POST['cool']) && !isset($_POST['button'])) {
 </body>
 
 <?php 
+/* Display the list of things people said, exactly as they were stored. */
 if (!isset($_POST['button'])) {
 	echo "<b>List of things people have said:</b><br/>\n";
 	$lines = file("list.txt");
