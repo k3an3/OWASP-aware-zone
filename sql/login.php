@@ -29,7 +29,7 @@ if($_POST['user'] !== null || $_POST['pass'] !== null) {
 	die("<br/>Could not find a user with that username and password combination.");
      $data = mysqli_fetch_assoc($result);
      $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) / 10000000 * time() * 17 + $data['ID']; 
-     $result = mysqli_query($conn, "INSERT INTO Sessions (username, sessionID) values('$username', '$session')");
+     $result = mysqli_query($conn, "INSERT INTO Sessions (username, sessionID) values(\"$username\", \"$session\")");
      echo "Logged in as " . $username . ". Redirecting...";
      echo '<meta http-equiv="refresh" content="0;URL=index.php?session=' . $session . '">';
 }
