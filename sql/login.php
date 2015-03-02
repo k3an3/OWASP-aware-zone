@@ -30,8 +30,6 @@ if($_POST['user'] !== null || $_POST['pass'] !== null) {
      $data = mysqli_fetch_assoc($result);
      $session = intval(str_replace('.', '', $_SERVER['REMOTE_ADDR'])) / 10000000 * time() * 17 + $data['ID']; 
      $result = mysqli_query($conn, "INSERT INTO Sessions (username, sessionID) values('$username', '$session')");
-     if (!$result) 
-	die("Could not create a session. " . mysqli_error($conn));
      echo "Logged in as " . $username . ". Redirecting...";
      echo '<meta http-equiv="refresh" content="0;URL=index.php?session=' . $session . '">';
 }
