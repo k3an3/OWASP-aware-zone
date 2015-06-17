@@ -1,4 +1,5 @@
-<?php 
+<?php
+parse_str(implode('&', array_slice($argv, 1)), $_GET);
 /* Code to handle authentication check. */
 $conn = mysqli_connect('localhost', 'username', 'password');
 if(!$conn) {
@@ -30,7 +31,7 @@ if(isset($_GET['session']) && !$loggedin) {
       unset($_COOKIE['session']);
   setcookie("session", $session, time() + 3600);
   $loggedin = true;
-} 
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -55,7 +56,7 @@ if(!isset($_GET['page'])) {
 /* If the user is logged in, show profile and logout options, otherwise prompt for login or account creation. */
 if($loggedin) {
    echo "Logged in as " . $username .". <a href='profile.php'>View Profile</a> <a href='logout.php'>Log out</a><br/>";
-} else { 
+} else {
      echo '<br/>You are not logged in. <a href="login.php">Log in</a> or <a href="newaccount.php">create an account</a> in order to post.<br/>';
 }
 
@@ -65,13 +66,13 @@ if ($_POST['title'] !== null && $_POST['body'] !== null && !isset($_POST['button
 	$body = trim($_POST['body']);
 	$date = date('l F jS Y h:i:s A');
 	$result = mysqli_query($conn, "INSERT INTO Comments (Title, Body, User, Date) values ('$title', '$body', '$username', '$date')");
-	if (!$result) 
+	if (!$result)
 	    die("Failed to post. MySQL Error: " . mysqli_error($conn));
 	$res = mysqli_query($conn, "SELECT * FROM Comments");
 	echo "<h1>Thanks for posting!</h1><a href='index.php?page=" . mysqli_num_rows($res) . "'>View post</a><br/>";
-} 
+}
 
-/* Runs if the reset button is pressed or the GET reset variable is set to true. Drops all database tables and rebuilds them from scratch, adding some sample users and comments. 
+/* Runs if the reset button is pressed or the GET reset variable is set to true. Drops all database tables and rebuilds them from scratch, adding some sample users and comments.
 Useful when the site has been nuked, or when setting up the demo for the first time. */
 if (isset($_POST['button']) || $_GET['reset'] === 'true') {
 	mysqli_query($conn, "DROP TABLE Comments, Users, Sessions");
@@ -93,7 +94,7 @@ if (isset($_POST['button']) || $_GET['reset'] === 'true') {
 
 <div class="post">
 
-<?php 
+<?php
 /* Display the post from the current page using database queries. Allows for multiple rows to be printed... */
 if (!isset($_POST['button'])) {
 	echo "<b>Page $page:</b><br/>\n";
@@ -105,7 +106,7 @@ if (!isset($_POST['button'])) {
 	$rows = mysqli_num_rows($res);
 	while($data = mysqli_fetch_assoc($result)) {
 		echo "<h2>" . $data['Title'] . "</h2><p>" . $data['Body'] . "<br/><br/>";
-		echo "<i>Posted by <a href='profile.php?user={$data['User']}'>{$data['User']}</a> on {$data['Date']}</i><br/>";	
+		echo "<i>Posted by <a href='profile.php?user={$data['User']}'>{$data['User']}</a> on {$data['Date']}</i><br/>";
 		echo "<br/>";
 	}
 }
@@ -116,7 +117,7 @@ if($page + 1 <= $rows)
     echo "<a href='index.php?page=" . ($page + 1) . "'><button>Next page</button></a>";
 ?>
 </div> <?php
-echo "Goto page:</br>";	
+echo "Goto page:</br>";
 for($i = 1; $i <= $rows; $i++) {
     echo "<a href='index.php?page=$i'>$i</a> ";
 }
@@ -127,7 +128,7 @@ if($loggedin) { ?>
     <input type="submit" value="submit">
     </form>
     <br>
-<?php 
+<?php
 }
 ?>
 
@@ -137,7 +138,7 @@ if($loggedin) { ?>
     </p>
 </form>
 <br>
-<?php 
+<?php
 echo '<a href="index.php?page=' . $page . '&hint=true">Hint</a>';
 if(isset($_GET['hint'])) {
 ?>
@@ -146,7 +147,7 @@ if(isset($_GET['hint'])) {
 is being passed in as a GET variable. Oftentimes with this setup, an SQL database is what actually holds each page. Knowing this, an SQL command will need to be issued somewhere in
 order to retrieve the page we want. Is the page number being directly inserted into an SQL command? If so, what happens when we replace the page number with SQL commands?</p>
 
-<p>Since the posts are stored in a database, can we mess with the insert command if we add SQL commands to a post? Is there a way to escape the text and make it think you are 
+<p>Since the posts are stored in a database, can we mess with the insert command if we add SQL commands to a post? Is there a way to escape the text and make it think you are
 issuing part of the query? Look at the SQL queries in the code, and think about apostrophes. Keep in mind that you can use an SQL comment "-- -" to remove the rest of a query.</p>
 
 <p>The posts might not be the only thing stored in the database. What else does the site need to keep track of?</p>
