@@ -1,5 +1,8 @@
 <?php
-parse_str(implode('&', array_slice($argv, 1)), $_GET);
+/* Allow init/reset from cli args */
+if(isset($argv)) {
+    parse_str(implode('&', array_slice($argv, 1)), $_GET);
+}
 /* Code to handle authentication check. */
 $conn = mysqli_connect('localhost', 'username', 'password');
 if(!$conn) {
