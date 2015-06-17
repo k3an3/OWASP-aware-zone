@@ -2,8 +2,8 @@ FROM debian
 MAINTAINER Keane O'Kelley
 
 # You shouldn't need to uncomment this unless you are me 
-#RUN echo 'Acquire::http::Proxy "http://192.168.43.249:3142";' > /etc/apt/apt.conf.d/02proxy && \
-#    echo 'Acquire::https::Proxy "false";' >> /etc/apt/apt.conf.d/02proxy
+RUN echo 'Acquire::http::Proxy "http://192.168.43.249:3142";' > /etc/apt/apt.conf.d/02proxy && \
+    echo 'Acquire::https::Proxy "false";' >> /etc/apt/apt.conf.d/02proxy
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -yq install \
     php5-fpm \

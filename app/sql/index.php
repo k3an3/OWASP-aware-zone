@@ -40,7 +40,7 @@ if(isset($_GET['session']) && !$loggedin) {
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="../css/demo.css" />
-<link rel="shortcut icon" href="mat.ico">
+<link rel="shortcut icon" href="/mat.ico">
 <title>SQL Injection Demo</title>
 </head>
 

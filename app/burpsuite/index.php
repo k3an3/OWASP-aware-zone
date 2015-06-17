@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<link rel="shortcut icon" href="mat.ico">
+<link rel="shortcut icon" href="/mat.ico">
 <title>Burpsuite Demo</title>
 </head>
 
