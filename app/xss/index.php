@@ -21,10 +21,10 @@ Leave me a comment: <input type="text" name="cool">
 /* Take whatever the user posts, and save it to file. */
 if (isset($_POST['cool']) && !isset($_POST['button'])) {
 	echo "<h1>Thanks for posting!</h1><br/>";
-	echo "You said: "; 
-	echo $_POST["cool"]; 
+	echo "You said: ";
+	echo $_POST["cool"];
 	file_put_contents("list.txt", trim($_POST["cool"]).PHP_EOL, FILE_APPEND);
-} 
+}
 ?>
 <?php
     if (isset($_POST['button']) || $_GET['reset'] === 'true')
@@ -37,7 +37,7 @@ if (isset($_POST['cool']) && !isset($_POST['button'])) {
 
 </body>
 
-<?php 
+<?php
 /* Display the list of things people said, exactly as they were stored. */
 if (!isset($_POST['button'])) {
 	echo "<b>List of things people have said:</b><br/>\n";
@@ -45,7 +45,7 @@ if (!isset($_POST['button'])) {
 	foreach ($lines as $line_num => $line) {
 	  echo "#<b>{$line_num}</b> : " . $line . "<br />\n";
 	}
-	
+
 	echo "<br/>";
 }
 ?>
@@ -59,7 +59,7 @@ if (!isset($_POST['button'])) {
 
 <a href="index.php?hint=true">Hint</a>
 
-<?php 
+<?php
 if(isset($_GET['hint'])) {
 ?>
 <div class="hint">
@@ -71,7 +71,7 @@ and send them to a different website for harvesting. A <a href="cookiecollector.
 <?php
 }
 ?>
-
+<p style="font-size:11px"><a href="http://demos.keaneokelley.com">Home</a></p>
 <p style="font-size:10px"><a href="https://www.keaneokelley.com">Keane was here.</a></p>
 
 

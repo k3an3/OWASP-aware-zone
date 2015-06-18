@@ -159,6 +159,7 @@ issuing part of the query? Look at the SQL queries in the code, and think about 
 }
 ?>
 
+<p style"font-size:11px"><a href="http://demos.keaneokelley.com">Home</a></p>
 <p style="font-size:10px"><a href="https://www.keaneokelley.com">Keane was here.</a></p>
 
 </body>
