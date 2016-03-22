@@ -13,7 +13,6 @@ RUN apt-get update && \
     nginx \
     mysql-server \
     mysql-client \
-    iptables
 ADD owasp-nginx.conf /etc/nginx/conf.d/
 ADD app/ /var/www/demos/
 RUN chown www-data:www-data -R /var/www/demos && \
