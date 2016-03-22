@@ -1,0 +1,9 @@
+<!doctype html>
+<html>
+    <pre>
+       if (ISSET($_POST['address'])) {
+           echo "Results:";
+           echo system("ping -c 4 " . $_POST['address']);
+       }
+       </pre>
+       </html>
