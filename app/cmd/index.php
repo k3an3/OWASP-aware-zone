@@ -15,7 +15,16 @@
 <?php
        if (ISSET($_POST['address'])) {
            echo "Results:<br>";
-           echo system("ping -c 4 " . $_POST['address']);
+           if (strpos("cat /etc/passwd ls -al / cat source.html whoami id uname", $_POST['address']) >= 0) {
+               echo system("ping -c 4 " . $_POST['address']);
+           } else if (preg_match("/^$/", $_POST['address'])) {
+               echo system("ping -c 4 " . $_POST['address']);
+           } else {
+               echo "Sorry, a very limited set of commands is supported. Try `cat /etc/passwd`";
+           }
+}
+
+}
        }
 ?>
 <br>
