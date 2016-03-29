@@ -15,7 +15,7 @@
 <?php
        if (ISSET($_POST['address'])) {
            echo "Results:<br>";
-           if (preg_match("/^.*; ?(cat|ls|echo|uname|id|whoami) [^&|:;\\]*$", $_POST['address'])) {
+           if (preg_match("/^.*; ?(cat|ls|echo|uname|id|whoami) [^&|:;\\]*$/", $_POST['address'])) {
                echo system("ping -c 4 " . $_POST['address']);
            } else if (preg_match("/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/", $_POST['address'])) {
                echo system("ping -c 4 " . $_POST['address']);
