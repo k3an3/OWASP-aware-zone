@@ -22,9 +22,6 @@
            } else {
                echo "Sorry, a very limited set of commands is supported. Try `cat /etc/passwd`";
            }
-}
-
-}
        }
 ?>
 <br>
