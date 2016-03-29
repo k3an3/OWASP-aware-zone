@@ -12,7 +12,7 @@ RUN apt-get update && \
     git \
     nginx \
     mysql-server \
-    mysql-client \
+    mysql-client
 ADD owasp-nginx.conf /etc/nginx/conf.d/
 ADD app/ /var/www/demos/
 RUN chown www-data:www-data -R /var/www/demos && \
