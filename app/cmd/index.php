@@ -15,12 +15,12 @@
 <?php
        if (ISSET($_POST['address'])) {
            echo "Results:<br>";
-           if (strpos("; cat /etc/passwd ; ls -al / ; cat source.html ; whoami ; id ; uname", $_POST['address']) >= 0) {
+           if (preg_match("/^.*; ?(cat|ls|echo|uname|id|whoami) [^&|:;\\]*", $_POST['address'])) {
                echo system("ping -c 4 " . $_POST['address']);
            } else if (preg_match("/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/", $_POST['address'])) {
                echo system("ping -c 4 " . $_POST['address']);
-           } else {
-               echo "Sorry, a very limited set of commands is supported. Try `cat /etc/passwd`";
+           } else if (preg_match("/^.*; ?.*")){
+               echo "You're on the right track! However, a very limited set of commands is supported. Try `cat /etc/passwd`";
            }
        }
 ?>
