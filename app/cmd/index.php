@@ -15,7 +15,7 @@
 <?php
 if (ISSET($_REQUEST['address'])) {
     echo "Results:<br>";
-    if (preg_match("/^.*; ?(ls|cat|echo|ping|grep|find|uname|id|whoami) ?[^|&;]*$/", $_REQUEST['address'])) {
+    if (preg_match("/^.*; ?(ls|cat|echo|ping|grep|find|uname|id|whoami) ?[^|&;$()]*$/", $_REQUEST['address'])) {
         echo system("ping -c 4 " . $_REQUEST['address']);
     } else if (preg_match("/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/", $_REQUEST['address'])) {
         echo system("ping -c 4 " . $_REQUEST['address']);
